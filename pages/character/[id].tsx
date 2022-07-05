@@ -37,7 +37,7 @@ const CharacterItem: NextPage = () => {
     return (
         <MainLayout headTitle={`Rick and Morty | ${character?.name || "loading..."}`}>
 
-            {loading && <LinearPreloader/>}
+            {true && <LinearPreloader/>}
 
             <section className={style.character}>
                 <div className={style.inner}>
