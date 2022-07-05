@@ -17,12 +17,12 @@ const CharacterItem: NextPage = () => {
     const router = useRouter();
     const {id} = router.query;
 
-    const {data: info, error: errorInfo} = useSWRImmutable(
+    const {data: info, error: errorInfo, isValidating: isValidatingInfo} = useSWRImmutable(
         charactersAPI.getInfo.key,
         charactersAPI.getInfo.fetcher
     );
 
-    const {data: character, error: errorCharacter} = useSWRImmutable(
+    const {data: character, error: errorCharacter, isValidating: isValidatingCharacter} = useSWRImmutable(
         charactersAPI.getById.key(id as string),
         charactersAPI.getById.fetcher
     );
@@ -33,10 +33,8 @@ const CharacterItem: NextPage = () => {
     );
 
     const loading = (!info && !errorInfo) || (!character && !errorCharacter) || (!episodes && !errorEpisodes)
-    console.log(loading)
 
     return (
-
         <MainLayout headTitle={`Rick and Morty | ${character?.name || "loading..."}`}>
 
             {loading && <LinearPreloader/>}
