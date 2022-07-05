@@ -1,0 +1,20 @@
+.navigateBlock {
+  display: flex;
+  justify-content: space-between;
+
+  .btn {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.5);
+
+    .direction {
+      color: red;
+      margin-right: 5px;
+    }
+
+    .btnLabel {
+      text-transform: none;
+    }
+  }
+
+}

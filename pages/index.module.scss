@@ -1,0 +1,72 @@
+@import "../assets/styles/app.scss";
+
+.index {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+
+  .link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+
+    &:hover {
+      .imageWrapper {
+        border-color: #6a2291;
+        box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      p {
+        box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.5);
+        background: #6a2291;
+      }
+
+      img {
+        transform: scale(1.2);
+      }
+    }
+
+    .imageWrapper {
+      border: 5px solid darkorchid;
+      background: darkorchid;
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+      transition: 0.3s;
+
+      img {
+        border-radius: 10px;
+        transition: 0.4s;
+      }
+
+      @include desktop() {
+        width: 150px;
+        height: 150px;
+        border: 10px solid darkorchid;
+      }
+    }
+
+    p {
+      margin-top: 10px;
+      background: darkorchid;
+      color: #FFF;
+      padding: 2px 5px;
+      border-radius: 100px;
+      text-align: center;
+      text-transform: capitalize;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+      transition: 0.3s;
+    }
+
+  }
+
+
+
+}

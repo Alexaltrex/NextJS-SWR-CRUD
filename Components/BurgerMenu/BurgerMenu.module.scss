@@ -1,0 +1,40 @@
+@import "../../assets/styles/app.scss";
+
+.burgerMenu {
+  position: fixed;
+  z-index: 700;
+  background: #FFFFFF;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateX(100%);
+  transition: 0.3s;
+  @include center();
+
+  &_show {
+    transform: translateX(0%);
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .link {
+      @include PermanentMarker();
+      font-size: 36px;
+      text-decoration: none;
+      color: darkorchid;
+
+      &:not(:first-child) {
+        margin-top: 40px;
+      }
+
+      &_active {
+        text-decoration: underline;
+      }
+    }
+  }
+
+}

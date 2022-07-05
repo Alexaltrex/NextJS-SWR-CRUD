@@ -1,0 +1,90 @@
+@import "../../assets/styles/app";
+
+.characterCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+
+  @include desktop {
+    flex-direction: row;
+  }
+
+  .imgWrapper {
+    position: relative;
+    box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.5);
+    border: 10px solid #645755;
+    background: #645755;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 250px;
+    height: 250px;
+
+    img {
+      width: 250px;
+      height: 250px;
+    }
+
+    .loading {
+      @include absoluteCenter;
+      z-index: 2;
+    }
+  }
+
+  .properties {
+    align-self: stretch;
+    margin-top: 16px;
+
+    @include desktop {
+      align-self: center;
+      margin-top: 0;
+      margin-left: 32px;
+      flex-grow: 1;
+    }
+
+    .title {
+      @include h1;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px;
+      border-radius: 100px;
+
+      &:nth-child(odd) {
+        background: #645755;
+
+        p, button {
+          background: #39fd98;
+          color: #35302e;
+        }
+      }
+
+      &:nth-child(even) {
+        p, button {
+          background: #645755;
+          color: #FFF;
+        }
+      }
+
+      p, button {
+        padding: 6px;
+        border-radius: 100px;
+        font-size: 12px;
+
+        @include desktop() {
+          padding: 8px 12px;
+          font-size: 16px;
+        }
+      }
+
+      button {
+        @include button();
+        text-decoration: underline;
+      }
+    }
+  }
+}

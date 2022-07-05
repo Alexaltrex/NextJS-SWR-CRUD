@@ -1,0 +1,59 @@
+@mixin desktop {
+  @media all and (min-width: 1140px) {
+    @content;
+  }
+}
+
+@mixin onlyMobile($displayType: block) {
+  display: $displayType;
+  @content;
+
+  @include desktop() {
+    display: none;
+  }
+}
+
+@mixin onlyDesktop($displayType: block) {
+  display: none;
+
+  @include desktop {
+    display: $displayType;
+    @content;
+  }
+}
+
+@mixin center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin inner() {
+  @include desktop() {
+    width: 1140px;
+    margin: 0 auto;
+  }
+}
+
+@mixin button() {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+@mixin h1() {
+  color: #176942;
+  font-size: 22px;
+
+  @include desktop() {
+    font-size: 36px;
+  }
+}
+
+@mixin absoluteCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

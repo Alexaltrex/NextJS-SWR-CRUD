@@ -1,0 +1,17 @@
+@import "../../assets/styles/app.scss";
+
+.linearPreloader {
+  height: 10px;
+  position: absolute;
+  z-index: 1000000;
+  top: 40px;
+  left: 0;
+  right: 0;
+
+  @include desktop {
+    top: 60px;
+    left: calc(-50vw + 512px);
+    right: calc(-50vw + 512px);
+  }
+}
+

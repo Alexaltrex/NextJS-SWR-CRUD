@@ -1,0 +1,59 @@
+@import "../../assets/styles/app.scss";
+
+.characterCard {
+  text-decoration: none;
+  cursor: pointer;
+  width: 100px;
+  margin: 5px;
+
+  @include desktop() {
+    width: 150px;
+  }
+
+  .imgWrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+
+    @include desktop() {
+      width: 150px;
+      height: 150px;
+    }
+
+    img {
+      transition: 0.3s;
+    }
+  }
+
+  p {
+    margin-top: 5px;
+    padding: 3px;
+    background: royalblue;
+    color: #FFF;
+    text-align: center;
+    @include RobotoRegular();
+    font-size: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  &:hover {
+    .imgWrapper {
+      box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.5);
+
+      img {
+        transform: scale(1.1);
+      }
+    }
+
+    p {
+      background: #2f499d;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    }
+  }
+}

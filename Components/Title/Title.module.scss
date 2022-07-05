@@ -1,0 +1,26 @@
+@import "../../assets/styles/app.scss";
+
+.titleBlock {
+  display: flex;
+  align-items: center;
+
+  .icon {
+    color: rgb(65, 105, 225);//darkorange;
+    font-size: 36px;
+
+    @include desktop() {
+      font-size: 44px;
+    }
+  }
+
+  .title {
+    @include RobotoBold();
+    text-transform: capitalize;
+    margin-left: 5px;
+    font-size: 24px;
+
+    @include desktop() {
+      font-size: 36px;
+    }
+  }
+}

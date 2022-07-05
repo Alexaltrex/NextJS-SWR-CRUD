@@ -1,0 +1,120 @@
+@import "../../assets/styles/app.scss";
+
+.header {
+  background: #164fde;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  z-index: 800;
+  padding: 0 20px;
+  box-sizing: border-box;
+  transition: 0.3s;
+
+  @include desktop() {
+    height: 60px;
+    padding: 0 30px;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+    @include inner();
+
+    .logo {
+      text-decoration: none;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        .imageWrapper {
+          transform: rotate(360deg);
+        }
+        svg {
+          transform: rotateX(360deg);
+        }
+      }
+
+      .imageWrapper {
+        transition: 0.3s;
+        position: relative;
+        width: 35px;
+        height: 35px;
+
+        @include desktop() {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      svg {
+        transition: 0.3s;
+        margin-left: 10px;
+        height: 16px;
+
+        @include desktop {
+          height: 24px;
+        }
+
+        path {
+          fill: #FFF;
+        }
+      }
+    }
+
+    .burgerBtn {
+      @include onlyMobile(flex) {
+        color: #FFF;
+        transition: 0.3s;
+      }
+
+      &_showBurgerMenu {
+        color: #000000;
+      }
+    }
+
+    .links {
+      @include onlyDesktop(flex) {
+        align-items: center;
+
+        .link {
+          @include PermanentMarker();
+          font-size: 24px;
+          text-decoration: none;
+          color: #FFF;
+          transition: 0.3s;
+
+          &:hover {
+            color: #CCC;
+          }
+
+          &_active {
+            color: lime;
+
+            &:hover {
+              color: lime;
+            }
+          }
+
+          &:not(:first-child) {
+            margin-left: 30px;
+          }
+        }
+      }
+    }
+
+  }
+
+  &_showMenu {
+    background: #FFF;
+  }
+
+
+
+}

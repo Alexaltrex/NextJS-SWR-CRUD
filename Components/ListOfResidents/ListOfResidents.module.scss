@@ -1,0 +1,104 @@
+@import "../../assets/styles/app.scss";
+
+.listOfResidents {
+  margin-top: 10px;
+
+  @include desktop() {
+    margin-top: 20px;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+
+    .label {
+      color: #000;
+      font-size: 16px;
+
+      @include desktop() {
+        font-size: 24px;
+      }
+    }
+
+    .count {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      background: royalblue;
+      color: #FFF;
+      @include center();
+      border-radius: 50%;
+      margin-left: 10px;
+      font-size: 16px;
+
+      @include desktop() {
+        font-size: 24px;
+        width: 45px;
+        height: 45px;
+      }
+    }
+  }
+
+  .residents {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px -5px 0;
+    //justify-content: space-between;
+
+    .characterChip {
+      background: #FFF;
+      margin: 5px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: 2px 10px 2px 2px;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+      border-radius: 22px;
+      transition: 0.3s;
+
+      @include desktop() {
+        border-radius: 27px;
+      }
+
+      &:hover {
+        box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.5);
+
+        .imgWrapper {
+          img {
+            transform: scale(1.1);
+          }
+        }
+
+        p {
+          color: darkorchid;
+        }
+      }
+
+      .imgWrapper {
+        position: relative;
+        overflow: hidden;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+
+        @include desktop() {
+          width: 50px;
+          height: 50px;
+        }
+
+        img {
+          transition: 0.3s;
+        }
+      }
+
+
+      p {
+        margin-left: 5px;
+        color: #000;
+        transition: 0.3s;
+      }
+    }
+
+  }
+
+}

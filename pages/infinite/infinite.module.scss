@@ -1,0 +1,9 @@
+@import "../../assets/styles/app.scss";
+
+.infinite {
+  @include inner();
+
+  .btn {
+    margin-top: 10px;
+  }
+}

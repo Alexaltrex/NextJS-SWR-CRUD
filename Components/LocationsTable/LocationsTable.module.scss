@@ -1,0 +1,67 @@
+@import "../../assets/styles/app.scss";
+
+.locationsTable {
+  margin-top: 10px;
+  background: #FFF;
+
+  .tableHeadRow {
+    background: green;
+
+    .tableCell {
+      color: #FFF;
+
+      .tableSortLabel {
+        color: #FFF;
+
+        svg path {
+          fill: #FFF;
+        }
+      }
+
+    }
+  }
+
+  .tableCell {
+    padding: 5px 10px;
+
+    .name {
+      display: flex;
+      align-items: center;
+      color: darkorchid;
+      text-decoration: none;
+
+      p {
+        margin-right: 10px;
+      }
+
+      .icon {
+        opacity: 0;
+        transition: 0.3s;
+      }
+
+    }
+
+    &:hover {
+      .name {
+        text-decoration: underline;
+
+        p {
+
+        }
+
+        .icon {
+          opacity: 1;
+        }
+
+      }
+    }
+  }
+
+  .tableRow {
+    &:nth-child(odd) {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+
+}

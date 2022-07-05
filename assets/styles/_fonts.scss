@@ -1,0 +1,17 @@
+@mixin PermanentMarker {
+  font-family: 'Permanent Marker', cursive;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin RobotoRegular {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin RobotoBold {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}

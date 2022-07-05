@@ -1,0 +1,10 @@
+@import "../../assets/styles/app.scss";
+
+.locationItem {
+  @include inner();
+
+  .content {
+    margin-top: 20px;
+  }
+
+}
