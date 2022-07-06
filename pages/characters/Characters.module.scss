@@ -7,12 +7,14 @@
 
   .inner {
     @include inner();
+
+    .cards {
+      margin: 10px -5px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
   }
 
-  .cards {
-    margin: 10px -5px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
 }

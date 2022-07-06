@@ -3,6 +3,7 @@ import Head from "next/head";
 import {Header} from "../../Components/Header/Header";
 import style from "./MainLayout.module.scss"
 import {BurgerMenu} from "../../Components/BurgerMenu/BurgerMenu";
+import {SnackbarCustom} from "../../Components/SnackbarCustom/SnackbarCustom";
 
 interface IMainLayout {
     children: ReactNode
@@ -27,6 +28,8 @@ export const MainLayout: FC<IMainLayout> = ({
             <Header/>
 
             <BurgerMenu/>
+
+            <SnackbarCustom/>
 
             <main  className={style.main}>
                 {children}

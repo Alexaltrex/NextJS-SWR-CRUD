@@ -9,8 +9,7 @@ import style from "./EpisodeItem.module.scss";
 import useSWRImmutable from "swr/immutable";
 import {episodesAPI} from "../../api/episode.api";
 import {charactersAPI} from "../../api/character.api";
-import {LinearPreloader} from "../../Components/LinearPreloader/LinearPreloader";
-
+import {FetchDataWrapper} from "../../Layouts/FetchDataWrapper/FetchDataWrapper";
 
 const EpisodeItem: NextPage = () => {
     const router = useRouter();
@@ -31,40 +30,43 @@ const EpisodeItem: NextPage = () => {
         charactersAPI.getMultipleItems.fetcher
     );
 
+    const error = errorInfo
+        ? errorInfo
+        : errorEpisode
+            ? errorEpisode
+            : errorCharactersOfEpisode
+                ? errorCharactersOfEpisode
+                : null
+
     const loading = (!info && errorInfo) || (!episode && !errorEpisode) && (!charactersOfEpisode && !errorCharactersOfEpisode)
 
     return (
         <MainLayout headTitle={`Rick and Morty | ${episode?.episode || "loading..."} - ${episode?.name}`}>
-
-            {loading && <LinearPreloader/>}
-
-            <div className={style.episodeItem}>
-
-                {
-                    id && info &&
-                    <NavigateBlock onPrevClick={() => router.push(`/episode/${Number(id) - 1}`)}
-                                   onNextClick={() => router.push(`/episode/${Number(id) + 1}`)}
-                                   prevDisabled={Number(id) <= 1}
-                                   nextDisabled={Number(id) >= info.count}
-                                   btnLabel="episode"
-                    />
-                }
-
-                {
-                    episode &&
-                    <div className={style.content}>
-                        <InfoItem label="name" value={episode.name}/>
-                        <InfoItem label="episode" value={episode.episode}/>
-                        <InfoItem label="air date" value={episode.air_date}/>
-                    </div>
-                }
-
-                {
-                    charactersOfEpisode &&
-                    <ListOfResidents residents={charactersOfEpisode} label="episode"/>
-                }
-
-            </div>
+            <FetchDataWrapper error={error} loading={loading}>
+                <div className={style.episodeItem}>
+                    {
+                        id && info &&
+                        <NavigateBlock onPrevClick={() => router.push(`/episode/${Number(id) - 1}`)}
+                                       onNextClick={() => router.push(`/episode/${Number(id) + 1}`)}
+                                       prevDisabled={Number(id) <= 1}
+                                       nextDisabled={Number(id) >= info.count}
+                                       btnLabel="episode"
+                        />
+                    }
+                    {
+                        episode &&
+                        <div className={style.content}>
+                            <InfoItem label="name" value={episode.name}/>
+                            <InfoItem label="episode" value={episode.episode}/>
+                            <InfoItem label="air date" value={episode.air_date}/>
+                        </div>
+                    }
+                    {
+                        charactersOfEpisode &&
+                        <ListOfResidents residents={charactersOfEpisode} label="episode"/>
+                    }
+                </div>
+            </FetchDataWrapper>
         </MainLayout>
     )
 }

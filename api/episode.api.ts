@@ -1,7 +1,7 @@
-import {IEpisode, IEpisodesResponse} from "../types/episodes.api";
+import {IEpisode, IEpisodesResponse} from "../types/episodes.types";
 import {instanceRAM} from "./axios";
 import {getIdFromUrlEpisode} from "../helpers/helpers";
-import {ICharactersResponse, IInfo} from "../types/characters.types";
+import {IInfo} from "../types/characters.types";
 
 export const episodesAPI = {
     getInfo: {

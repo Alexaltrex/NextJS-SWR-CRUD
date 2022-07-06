@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {IEpisode} from "../../types/episodes.api";
+import {IEpisode} from "../../types/episodes.types";
 import style from "./EpisodesOfCharacter.module.scss"
 import clsx from "clsx";
 import Link from "next/link";

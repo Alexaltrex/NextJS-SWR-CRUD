@@ -9,6 +9,7 @@ import {ListOfResidents} from "../../Components/ListOfResidents/ListOfResidents"
 import useSWRImmutable from "swr/immutable";
 import {charactersAPI} from "../../api/character.api";
 import {locationsAPI} from "../../api/location.api";
+import {FetchDataWrapper} from "../../Layouts/FetchDataWrapper/FetchDataWrapper";
 
 const LocationItem: NextPage = () => {
     const router = useRouter();
@@ -30,32 +31,40 @@ const LocationItem: NextPage = () => {
     );
 
     const loading = (!info && !errorInfo) || (!location && !errorLocation) || (!characters && !errorCharactersOfLocation)
+    const error = errorInfo
+        ? errorInfo
+        : errorLocation
+            ? errorLocation
+            : errorCharactersOfLocation
+                ? errorCharactersOfLocation
+                : null
 
     return (
         <MainLayout headTitle={`Rick and Morty | ${location?.name || "loading..."}`}>
-            <div className={style.locationItem}>
-                {
-                    id && info &&
-                    <NavigateBlock onPrevClick={() => router.push(`/location/${Number(id) - 1}`)}
-                                   onNextClick={() => router.push(`/location/${Number(id) + 1}`)}
-                                   prevDisabled={Number(id) <= 1}
-                                   nextDisabled={Number(id) >= info.count}
-                                   btnLabel="location"
-                    />
-                }
-                {
-                    location &&
-                    <div className={style.content}>
-                        <InfoItem label="Name" value={location.name}/>
-                        {location.dimension && <InfoItem label="Dimension" value={location.dimension}/>}
-                        {location.type && <InfoItem label="Type" value={location.type}/>}
-                    </div>
-                }
+            <FetchDataWrapper error={error} loading={loading}>
+                <div className={style.locationItem}>
+                    {
+                        id && info &&
+                        <NavigateBlock onPrevClick={() => router.push(`/location/${Number(id) - 1}`)}
+                                       onNextClick={() => router.push(`/location/${Number(id) + 1}`)}
+                                       prevDisabled={Number(id) <= 1}
+                                       nextDisabled={Number(id) >= info.count}
+                                       btnLabel="location"
+                        />
+                    }
+                    {
+                        location &&
+                        <div className={style.content}>
+                            <InfoItem label="Name" value={location.name}/>
+                            {location.dimension && <InfoItem label="Dimension" value={location.dimension}/>}
+                            {location.type && <InfoItem label="Type" value={location.type}/>}
+                        </div>
+                    }
 
-                {characters && <ListOfResidents residents={characters} label="location"/>}
+                    {characters && <ListOfResidents residents={characters} label="location"/>}
 
-            </div>
-
+                </div>
+            </FetchDataWrapper>
         </MainLayout>
     )
 }

@@ -8,7 +8,7 @@ import {useRouter} from "next/router";
 import useSWRImmutable from 'swr/immutable'
 import {charactersAPI} from "../../api/character.api";
 import React from "react";
-import { LinearPreloader } from "../../Components/LinearPreloader/LinearPreloader";
+import {FetchDataWrapper} from "../../Layouts/FetchDataWrapper/FetchDataWrapper";
 
 const Characters: NextPage = () => {
     const router = useRouter();
@@ -28,46 +28,48 @@ const Characters: NextPage = () => {
     }
 
     const loading = (!info && !errorInfo) || (!characters && !errorCharacters)
+    const error = errorInfo
+        ? errorInfo
+        : errorCharacters
+            ? errorCharacters
+            : null
 
     return (
         <MainLayout headTitle="Rick and Morty | Characters">
-
-            {loading && <LinearPreloader/>}
-
-            <section className={style.characters}>
-                <div className={style.inner}>
-
-                    <TitleBlock title="characters"/>
-                    {
-                        info && page &&
-                        <Pagination variant="outlined"
-                                    size="small"
-                                    shape="rounded"
-                                    count={info.pages}
-                                    page={Number(page)}
-                                    showFirstButton
-                                    showLastButton
-                                    onChange={onChangeHandler}
-                                    sx={paginationSx}
-                                    disabled={loading}
-                        />
-                    }
-
-                    {
-                        characters &&
-                        <div className={style.cards}>
-                            {
-                                characters.map(character => (
-                                        <CharacterCard key={character.id}
-                                                       character={character}
-                                        />
+            <FetchDataWrapper error={error} loading={loading}>
+                <section className={style.characters}>
+                    <div className={style.inner}>
+                        <TitleBlock title="characters"/>
+                        {
+                            info && page &&
+                            <Pagination variant="outlined"
+                                        size="small"
+                                        shape="rounded"
+                                        count={info.pages}
+                                        page={Number(page)}
+                                        showFirstButton
+                                        showLastButton
+                                        onChange={onChangeHandler}
+                                        sx={paginationSx}
+                                        disabled={loading}
+                            />
+                        }
+                        {
+                            characters &&
+                            <div className={style.cards}>
+                                {
+                                    characters.map(character => (
+                                            <CharacterCard key={character.id}
+                                                           character={character}
+                                            />
+                                        )
                                     )
-                                )
-                            }
-                        </div>
-                    }
-                </div>
-            </section>
+                                }
+                            </div>
+                        }
+                    </div>
+                </section>
+            </FetchDataWrapper>
         </MainLayout>
     )
 }

@@ -12,6 +12,7 @@ import src0 from "../../public/links/characters.jpg";
 import src0_1 from "../../public/links/infinite.jpg";
 import src1 from "../../public/links/locations.jpg";
 import src2 from "../../public/links/episodes.jpg";
+import src3 from "../../public/links/crud.jpg";
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../hooks/useStore";
 
@@ -20,6 +21,8 @@ export const links = [
     {label: "infinite", href: "/infinite", slug: "infinite", src: src0_1},
     {label: "locations", href: "/locations", slug: "locations", src: src1},
     {label: "episodes", href: "/episodes", slug: "episodes", src: src2},
+    {label: "crud", href: "/products", slug: "products", src: src3},
+
 ];
 
 export const Header = observer(() => {

@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 import {createContext, useEffect, useState} from "react";
 import {Preloader} from "../Components/Preloader/Preloader";
 import {store, Store} from "../store/store";
+import {SWRConfig} from "swr";
 
 export const StoreContext = createContext<Store>({} as Store)
 
@@ -34,8 +35,14 @@ function MyApp({Component, pageProps}: AppProps) {
 
     return (
         <StoreContext.Provider value={store}>
-            <Component {...pageProps} />
-            {loading && <Preloader/>}
+            <SWRConfig value={{
+                revalidateOnFocus: false,
+                revalidateOnReconnect: false
+            }}>
+                <Component {...pageProps} />
+                {loading && <Preloader/>}
+            </SWRConfig>
+
         </StoreContext.Provider>
     )
 }

@@ -10,19 +10,19 @@ import useSWRImmutable from "swr/immutable";
 import {charactersAPI} from "../../api/character.api";
 import {getIdFromUrlLocation} from "../../helpers/helpers";
 import {episodesAPI} from "../../api/episode.api";
-import {LinearPreloader} from "../../Components/LinearPreloader/LinearPreloader";
 import React from "react";
+import {FetchDataWrapper} from "../../Layouts/FetchDataWrapper/FetchDataWrapper";
 
 const CharacterItem: NextPage = () => {
     const router = useRouter();
     const {id} = router.query;
 
-    const {data: info, error: errorInfo, isValidating: isValidatingInfo} = useSWRImmutable(
+    const {data: info, error: errorInfo} = useSWRImmutable(
         charactersAPI.getInfo.key,
         charactersAPI.getInfo.fetcher
     );
 
-    const {data: character, error: errorCharacter, isValidating: isValidatingCharacter} = useSWRImmutable(
+    const {data: character, error: errorCharacter} = useSWRImmutable(
         charactersAPI.getById.key(id as string),
         charactersAPI.getById.fetcher
     );
@@ -33,76 +33,80 @@ const CharacterItem: NextPage = () => {
     );
 
     const loading = (!info && !errorInfo) || (!character && !errorCharacter) || (!episodes && !errorEpisodes)
+    const error = errorInfo
+        ? errorInfo
+        : errorCharacter
+            ? errorCharacter
+            : errorEpisodes
+                ? errorEpisodes
+                : null
 
     return (
         <MainLayout headTitle={`Rick and Morty | ${character?.name || "loading..."}`}>
+            <FetchDataWrapper error={error} loading={loading}>
+                <section className={style.character}>
+                    <div className={style.inner}>
+                        {
+                            info && id &&
+                            <NavigateBlock onPrevClick={() => router.push(`/character/${Number(id) - 1}`)}
+                                           onNextClick={() => router.push(`/character/${Number(id) + 1}`)}
+                                           prevDisabled={loading || Number(id) <= 1}
+                                           nextDisabled={loading || Number(id) >= info.count}
+                                           btnLabel="character"
+                            />
+                        }
 
-            {true && <LinearPreloader/>}
+                        {
+                            character &&
+                            <div className={style.content}>
+                                <div className={style.imageWrapper}>
+                                    <Image src={character.image}
+                                           layout="fill"
+                                           objectFit="fill"
+                                           width={300}
+                                           height={300}
+                                           alt={character.name}
+                                    />
+                                </div>
 
-            <section className={style.character}>
-                <div className={style.inner}>
-                    {
-                        info && id &&
-                        <NavigateBlock onPrevClick={() => router.push(`/character/${Number(id) - 1}`)}
-                                       onNextClick={() => router.push(`/character/${Number(id) + 1}`)}
-                                       prevDisabled={loading || Number(id) <= 1}
-                                       nextDisabled={loading || Number(id) >= info.count}
-                                       btnLabel="character"
-                        />
-                    }
-
-                    {
-                        character &&
-                        <div className={style.content}>
-                            <div className={style.imageWrapper}>
-                                <Image src={character.image}
-                                       layout="fill"
-                                       objectFit="fill"
-                                       width={300}
-                                       height={300}
-                                       alt={character.name}
-                                />
+                                <div className={style.info}>
+                                    {
+                                        [
+                                            {label: "Name", value: character.name, href: undefined},
+                                            {label: "Gender", value: character.gender, href: undefined},
+                                            {label: "Species", value: character.species, href: undefined},
+                                            {label: "Status", value: character.status, href: undefined},
+                                            {label: "Type", value: character?.type, href: undefined},
+                                            {
+                                                label: "Location",
+                                                value: character.location.name,
+                                                href: character.location.url ? `/location/${getIdFromUrlLocation(character.location.url)}` : undefined
+                                            },
+                                            {
+                                                label: "Origin",
+                                                value: character.origin.name,
+                                                href: character.origin.url ? `/location/${getIdFromUrlLocation(character.origin.url)}` : undefined
+                                            },
+                                        ]
+                                            .map(({label, value, href}, index) => (
+                                                <InfoItem key={index}
+                                                          label={label}
+                                                          value={value}
+                                                          href={href}
+                                                />
+                                            ))
+                                    }
+                                    {
+                                        episodes && Boolean(episodes.length) &&
+                                        <EpisodesOfCharacter episodesOfCharacter={episodes}/>
+                                    }
+                                </div>
                             </div>
-
-                            <div className={style.info}>
-                                {
-                                    [
-                                        {label: "Name", value: character.name, href: undefined},
-                                        {label: "Gender", value: character.gender, href: undefined},
-                                        {label: "Species", value: character.species, href: undefined},
-                                        {label: "Status", value: character.status, href: undefined},
-                                        {label: "Type", value: character?.type, href: undefined},
-                                        {
-                                            label: "Location",
-                                            value: character.location.name,
-                                            href: character.location.url ? `/location/${getIdFromUrlLocation(character.location.url)}` : undefined
-                                        },
-                                        {
-                                            label: "Origin",
-                                            value: character.origin.name,
-                                            href: character.origin.url ? `/location/${getIdFromUrlLocation(character.origin.url)}` : undefined
-                                        },
-                                    ]
-                                        .map(({label, value, href}, index) => (
-                                            <InfoItem key={index}
-                                                      label={label}
-                                                      value={value}
-                                                      href={href}
-                                            />
-                                        ))
-                                }
-                                {
-                                    episodes && Boolean(episodes.length) &&
-                                    <EpisodesOfCharacter episodesOfCharacter={episodes}/>
-                                }
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </section>
+                        }
+                    </div>
+                </section>
+            </FetchDataWrapper>
         </MainLayout>
-
     )
 }
 export default CharacterItem

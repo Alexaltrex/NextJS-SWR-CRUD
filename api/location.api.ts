@@ -1,6 +1,6 @@
 import {instanceRAM} from "./axios";
 import {ILocation, ILocationsResponse} from "../types/locations.types";
-import {ICharactersResponse, IInfo} from "../types/characters.types";
+import {IInfo} from "../types/characters.types";
 
 export const locationsAPI = {
     getInfo: {

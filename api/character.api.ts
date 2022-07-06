@@ -5,15 +5,15 @@ import {getIdFromUrlCharacter} from "../helpers/helpers";
 export const charactersAPI = {
     getInfo: {
         key: "character",
-        fetcher: async (url: string):Promise<IInfo> => {
-            let response = await instanceRAM.get<ICharactersResponse>(url);
+        fetcher: async (url: string): Promise<IInfo> => {
+            const response = await instanceRAM.get<ICharactersResponse>(url);
             return response.data.info
         }
     },
     getAll: {
         key: (page: string) => `character/?page=${page}`,
         fetcher: async (url: string):Promise<ICharacter[]> => {
-            let response = await instanceRAM.get<ICharactersResponse>(url);
+            const response = await instanceRAM.get<ICharactersResponse>(url);
             return response.data.results
         }
     },
@@ -23,14 +23,14 @@ export const charactersAPI = {
             return `character/?page=${pageIndex + 1}`                    // ключ SWR
         },
         fetcher: async (url: string): Promise<ICharacter[]> => {
-            let response = await instanceRAM.get<ICharactersResponse>(url);
+            const response = await instanceRAM.get<ICharactersResponse>(url);
             return response.data.results
         }
     },
     getById: {
         key: (id: string) => `character/${id}`,
         fetcher: async (url: string):Promise<ICharacter> => {
-            let response = await instanceRAM.get<ICharacter>(url);
+            const response = await instanceRAM.get<ICharacter>(url);
             return response.data
         },
     },
