@@ -4,15 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  flex-wrap: wrap;
 
   .link {
     text-decoration: none;
     display: flex;
     flex-direction: column;
-
-    &:not(:first-child) {
-      margin-left: 10px;
-    }
+    margin: 10px;
 
     &:hover {
       .imageWrapper {
@@ -66,7 +64,6 @@
     }
 
   }
-
 
 
 }
