@@ -8,6 +8,7 @@ export class Store {
         message: "",
         severity: "success"
     } as ISnackbar
+    @observable showHeader = true;
 
     constructor() {
         makeObservable(this)
@@ -21,6 +22,11 @@ export class Store {
     @action.bound
     setSnackbar(snackbar: ISnackbar) {
         this.snackbar = snackbar;
+    }
+
+    @action.bound
+    setShowHeader(showHeader: boolean) {
+        this.showHeader = showHeader;
     }
 
 }

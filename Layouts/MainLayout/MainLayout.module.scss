@@ -4,15 +4,21 @@
   position: relative;
   background-image: url(../../public/back.jpg);
   background-repeat: repeat;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-top: 40px;
+
+  @include desktop {
+    padding-top: 60px;
+  }
 
 
   .main {
-    min-height: 100vh;
     box-sizing: border-box;
-    padding: 56px 16px 16px;
+    padding: 16px;
 
     @include desktop() {
-      padding: 84px 24px 24px;
+      padding: 24px;
     }
   }
 }

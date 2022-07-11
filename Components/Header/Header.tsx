@@ -15,6 +15,7 @@ import src2 from "../../public/links/episodes.jpg";
 import src3 from "../../public/links/crud.jpg";
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../hooks/useStore";
+import {useEffect} from "react";
 
 export const links = [
     {label: "characters", href: "/characters/1", slug: "characters", src: src0},
@@ -28,12 +29,13 @@ export const links = [
 export const Header = observer(() => {
     const router = useRouter();
 
-    const {showBurgerMenu, setShowBurgerMenu} = useStore();
+    const {showBurgerMenu, setShowBurgerMenu, showHeader} = useStore();
 
     return (
         <header className={clsx({
             [style.header]: true,
             [style.header_showMenu]: showBurgerMenu,
+            [style.header_hide]: !showBurgerMenu && !showHeader,
         })}>
             <div className={style.inner}>
                 <Link href="/">

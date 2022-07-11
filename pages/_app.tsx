@@ -8,7 +8,7 @@ import {SWRConfig} from "swr";
 
 export const StoreContext = createContext<Store>({} as Store)
 
-function MyApp({Component, pageProps}: AppProps) {
+const  MyApp = ({Component, pageProps}: AppProps) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -31,7 +31,7 @@ function MyApp({Component, pageProps}: AppProps) {
             router.events.off('routeChangeComplete', handleStop)
             router.events.off('routeChangeError', handleStop)
         }
-    }, [router])
+    }, [router]);
 
     return (
         <StoreContext.Provider value={store}>

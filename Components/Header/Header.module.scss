@@ -10,7 +10,7 @@
   z-index: 800;
   padding: 0 20px;
   box-sizing: border-box;
-  transition: 0.3s;
+  transition: 0.5s;
 
   @include desktop() {
     height: 60px;
@@ -113,6 +113,10 @@
 
   &_showMenu {
     background: #FFF;
+  }
+
+  &_hide {
+    transform: translateY(-102%);
   }
 
 
